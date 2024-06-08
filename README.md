@@ -60,7 +60,7 @@ Contributions are welcome! If you encounter any issues or have suggestions for i
 ## Developed By
 
 👤 **Vansh Chavda**
-- **Email:** vanshchavda111@gmail.com
+- **Email:** vanshchavda328@gmail.com
 - **Twitter:** [@vansh_chavda_](https://twitter.com/vansh_chavda_)
 - **LinkedIn:** [Vansh Chavda](https://www.linkedin.com/in/vanshchavda07)
 
