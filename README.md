@@ -23,13 +23,14 @@ Personal Bookshelf is a comprehensive book management system designed to help us
 
 ## How It Was Built
 
-- **State Management:** The application leverages Redux Toolkit for predictable and efficient state handling. LocalStorage is used for persisting user data and ensuring an auto-login feature.
+- **State Management:** The application utilizes Redux Toolkit for predictable and efficient state handling. It leverages LocalStorage for persisting user data and ensuring an automatic storage fetch feature.
+
   
 - **Data Fetching:** RTK Query is implemented for data fetching, with mutations managing Redux state and actions effectively.
   
 - **Styling:** Tailwind CSS is used for rapid development and consistent styling across the application.
-  
-- **User-Based System:** While this iteration focuses on a personal bookshelf, future enhancements could include user-based interactions using MongoDB and Cloudinary for photo uploads in posts and profiles.
+
+- **Redux Toolkit:** Redux Toolkit is utilized for efficient state management, including adding and removing books from the local storage. RTK Query is employed for data fetching and mutations, ensuring seamless integration with the application.
   
 - **Open Library API:** The Open Library API is used to fetch detailed book information, enhancing the user's ability to search for and add books to their bookshelf.
 
@@ -53,14 +54,11 @@ To get started with My Bookshelf, follow these steps:
    npm start
    ```
 
-## Contributing
-
-Contributions are welcome! If you encounter any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
 ## Developed By
 
 👤 **Vansh Chavda**
-- **Email:** vanshchavda328@gmail.com
+- **Email:** vanshchavda111@gmail.com
 - **Twitter:** [@vansh_chavda_](https://twitter.com/vansh_chavda_)
 - **LinkedIn:** [Vansh Chavda](https://www.linkedin.com/in/vanshchavda07)
 
