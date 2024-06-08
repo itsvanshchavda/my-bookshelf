@@ -5,7 +5,7 @@ import { booksApi } from '../api/books'
 
 const store = configureStore({
     reducer: {
-        userBooks: booksReducer,
+        userbooks: booksReducer,
         [booksApi.reducerPath]: booksApi.reducer
     },
 

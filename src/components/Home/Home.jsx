@@ -1,56 +1,59 @@
-import React from 'react'
-import { IoSearchOutline } from "react-icons/io5";
-import { useGetBooksQuery } from '../../api/books';
-
+import React, { useEffect, useState } from 'react';
+import { useGetBooksQuery, useGetSearchBooksQuery } from '../../api/books';
+import Loader from '../Loader/Loader';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBooks, removeBook } from '../../slices/BookShelf';
+import Navbar from '../Navbar/Navbar';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
+  const { data, isLoading } = useGetBooksQuery();
+  const dispatch = useDispatch();
+  const { myBooks } = useSelector((state) => state.userbooks);
+  const { search } = useLocation();
+  const { data: searchPost, isLoading: isSearchLoading } = useGetSearchBooksQuery(search);
 
-  const { data } = useGetBooksQuery();
+  useEffect(() => {
+    console.log(myBooks);
+  }, [myBooks]);
+
+  const handleAddBooks = (book) => {
+    dispatch(addBooks(book));
+    console.log(book);
+  };
+
+  const handleRemove = (title) => {
+    dispatch(removeBook({ title }));
+  };
+
+  const booksData = searchPost?.docs || data?.docs;
+
   return (
-
     <section>
-
-      <div className='flex justify-between py-16 px-16 items-center'>
-
-
-        <h1 className='text-2xl uppercase font-bold'>Personal <span className='text-green-600'>Bookshelf.</span></h1>
-
-        <div className='flex items-center justify-center '>
-          <IoSearchOutline size={25} className='' />
-          <input type="text" className='border-b-2 rounded-lg px-10 py-2 focus:outline-none ' placeholder='Search By Book Name' />
-
-
+      <Navbar />
+      {(isLoading || isSearchLoading) ? (
+        <Loader />
+      ) : (
+        <div className='grid grid-cols-4 max-sm:grid-cols-1 max-xl:grid-cols-2 px-20 gap-10 place-content-center mb-10'>
+          {booksData?.map((item, index) => (
+            <div key={index} className='flex border rounded-md hover:shadow-xl cursor-pointer duration-300 gap-4 w-auto h-44 flex-col justify-center items-center'>
+              <h1>{item?.title}</h1>
+              <p>{item.edition_count}</p>
+              {myBooks?.find((book) => book.title === item?.title) ? (
+                <button type='submit' onClick={() => handleRemove(item?.title)} className='md:px-10 px-5 bg-zinc-700 text-white py-2 rounded-lg'>
+                  Remove Book
+                </button>
+              ) : (
+                <button type='submit' onClick={() => handleAddBooks(item)} className='md:px-10 px-5 bg-green-500 text-white py-2 rounded-lg'>
+                  Add To Bookshelf
+                </button>
+              )}
+            </div>
+          ))}
         </div>
-
-        <div className='flex justify-center items-center'>
-          <div className='flex-1'>
-            <button className='px-10 py-2 bg-green-500 text-white rounded-lg hover:scale-105 duration-300'>
-              My Bookshelf
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-
-      <div>
-        {data && data?.docs?.map((item,index) => (
-          <div>
-            {item.title}
-            <img src={item.img} alt="" />
-          </div>
-        ))}
-      </div>
-
-
-
-
-
-
-
-
+      )}
     </section>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
